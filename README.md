@@ -21,6 +21,13 @@ ArogyaMitra is a full-stack doctor appointment booking application. Patients can
 - Auth: JSON Web Tokens
 - Uploads: Multer
 
+## Live Deployment
+
+- Frontend: https://vip-c2-book-a-doctor-gold.vercel.app/login
+- Backend: https://vip-c2-book-a-doctor-ntxa.onrender.com
+
+The backend is hosted on Render's free tier, so the first request after inactivity can take 30-60 seconds while the service wakes up.
+
 ## Project Structure
 
 ```text
@@ -46,7 +53,7 @@ Create `server/.env`:
 
 ```env
 PORT=5000
-MONGO_URL=your_mongodb_connection_string
+MONGO_DB=your_mongodb_connection_string
 JWT_KEY=your_jwt_secret
 ```
 
@@ -73,6 +80,70 @@ If your backend URL is different, create `client/.env`:
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
+
+## Deployment
+
+This project is deployed from GitHub using:
+
+- MongoDB Atlas for the database
+- Render for the Express backend
+- Vercel for the React frontend
+
+### 1. Deploy Backend On Render
+
+Create a Render Web Service from the GitHub repository.
+
+Use these settings:
+
+```text
+Runtime: Node
+Branch: main
+Root Directory: server
+Build Command: npm install
+Start Command: node index.js
+```
+
+Add these Render environment variables:
+
+```env
+MONGO_DB=your_mongodb_atlas_connection_string
+JWT_KEY=your_jwt_secret
+PORT=5000
+```
+
+After deployment, test the backend URL:
+
+```text
+https://vip-c2-book-a-doctor-ntxa.onrender.com/
+```
+
+Expected response:
+
+```text
+ArogyaMitra Backend Running
+```
+
+### 2. Deploy Frontend On Vercel
+
+Create a Vercel project from the same GitHub repository.
+
+Use these settings:
+
+```text
+Framework Preset: Vite
+Root Directory: client
+Install Command: npm install
+Build Command: npm run build
+Output Directory: dist
+```
+
+Add this Vercel environment variable:
+
+```env
+VITE_API_URL=https://vip-c2-book-a-doctor-ntxa.onrender.com/api
+```
+
+Redeploy the frontend after adding or changing `VITE_API_URL`.
 
 ## Useful Commands
 
