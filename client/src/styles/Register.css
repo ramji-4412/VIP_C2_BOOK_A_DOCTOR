@@ -1,0 +1,596 @@
+/* ================================================================
+   ArogyaMitra – Register.css
+   Design tokens (consistent with Home.css & Login.css):
+     --blue-deep   #0A4FA6
+     --blue-mid    #1A73E8
+     --blue-light  #E8F1FD
+     --teal        #00B4A6
+     --white       #FFFFFF
+     --text-dark   #0F1C2E
+     --text-muted  #5A6E84
+     --border      #DCE8F8
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue-deep: #0a4fa6;
+  --blue-mid: #1a73e8;
+  --blue-light: #e8f1fd;
+  --teal: #00b4a6;
+  --white: #ffffff;
+  --text-dark: #0f1c2e;
+  --text-muted: #5a6e84;
+  --border: #dce8f8;
+  --radius: 14px;
+  --transition: 0.2s ease;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: var(--text-dark);
+  background: var(--white);
+}
+
+/* ── ROOT LAYOUT ───────────────────────────────────────────────── */
+.register-root {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── LEFT PANEL ────────────────────────────────────────────────── */
+.reg-panel-left {
+  position: relative;
+  flex: 0 0 42%;
+  background: linear-gradient(160deg, #062e6f 0%, var(--blue-deep) 50%, #055f72 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Ambient glows */
+.reg-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.reg-glow--top {
+  top: -100px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(0, 180, 166, 0.25) 0%, transparent 70%);
+}
+
+.reg-glow--bottom {
+  bottom: -100px;
+  left: -80px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(26, 115, 232, 0.22) 0%, transparent 70%);
+}
+
+.reg-panel-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2.5rem 2.75rem;
+}
+
+/* Brand */
+.reg-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.reg-brand-icon {
+  color: var(--teal);
+  font-style: normal;
+}
+
+/* Panel body */
+.reg-panel-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 0 1.5rem;
+}
+
+.reg-panel-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 0.6rem;
+}
+
+.reg-panel-heading {
+  font-size: clamp(1.65rem, 2.3vw, 2.4rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.9rem;
+}
+
+.reg-panel-sub {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.75;
+  max-width: 340px;
+  margin-bottom: 2rem;
+}
+
+/* Step list */
+.reg-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.reg-step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.reg-step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.reg-step-dot > span:first-child {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.reg-step-line {
+  display: block;
+  width: 2px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 4px 0;
+}
+
+.reg-step-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 4px 0 0.2rem;
+  line-height: 1.3;
+}
+
+.reg-step-desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+}
+
+/* Stats strip */
+.reg-stats {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.reg-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 0.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reg-stat:last-child {
+  border-right: none;
+}
+
+.reg-stat-num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--teal);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.reg-stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 0.3rem;
+}
+
+/* ── RIGHT PANEL ───────────────────────────────────────────────── */
+.reg-panel-right {
+  flex: 1;
+  background: #f7faff;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Mobile brand bar */
+.reg-mobile-brand {
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--blue-deep);
+  text-decoration: none;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+}
+
+.reg-form-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ── FORM CARD ─────────────────────────────────────────────────── */
+.reg-form-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.25rem 2.25rem 2rem;
+  box-shadow: 0 4px 32px rgba(10, 79, 166, 0.09),
+    0 1px 4px rgba(10, 79, 166, 0.05);
+  border: 1px solid var(--border);
+}
+
+/* Header */
+.reg-form-header {
+  margin-bottom: 1.75rem;
+}
+
+.reg-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+
+.reg-form-heading {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.reg-form-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.reg-link {
+  color: var(--blue-deep);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.reg-link:hover {
+  color: var(--blue-mid);
+  text-decoration: underline;
+}
+
+/* ── FIELDS ────────────────────────────────────────────────────── */
+.reg-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.reg-field-group {
+  margin-bottom: 1.1rem;
+}
+
+.reg-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.reg-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.reg-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  z-index: 2;
+  line-height: 1;
+}
+
+.reg-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem 0.7rem 2.45rem;
+  font-size: 0.93rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: #f7faff;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  transition: border-color var(--transition), box-shadow var(--transition),
+    background var(--transition);
+  outline: none;
+}
+
+.reg-input:focus {
+  border-color: var(--blue-mid);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.13);
+}
+
+.reg-input::placeholder {
+  color: #b0bec9;
+}
+
+.reg-input.is-invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+
+.reg-input.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.13);
+}
+
+/* Password toggle */
+.reg-input--password {
+  padding-right: 2.8rem;
+}
+
+.reg-toggle-pwd {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--text-muted);
+  z-index: 2;
+  transition: color var(--transition);
+}
+
+.reg-toggle-pwd:hover {
+  color: var(--blue-deep);
+}
+
+/* Password strength meter */
+.pwd-strength-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.pwd-bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.pwd-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.pwd-strength-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 42px;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+
+/* Terms checkbox */
+.reg-agree-group {
+  margin-bottom: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+.reg-check .form-check-input {
+  border-color: var(--border);
+  border-radius: 5px;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.18rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.reg-check .form-check-input:checked {
+  background-color: var(--blue-deep);
+  border-color: var(--blue-deep);
+}
+
+.reg-check .form-check-input:focus {
+  box-shadow: 0 0 0 3px rgba(10, 79, 166, 0.15);
+}
+
+.reg-agree-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── BUTTONS ───────────────────────────────────────────────────── */
+.btn-register {
+  background: var(--blue-deep);
+  color: var(--white) !important;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.82rem 1rem;
+  letter-spacing: 0.2px;
+  transition: background var(--transition), transform var(--transition),
+    box-shadow var(--transition);
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.btn-register:hover,
+.btn-register:focus-visible {
+  background: var(--blue-mid);
+  color: var(--white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 79, 166, 0.28);
+}
+
+.btn-register:active {
+  transform: translateY(0);
+}
+
+/* Divider */
+.reg-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.2rem 0;
+}
+
+.reg-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.reg-divider-text {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Login CTA */
+.btn-login-cta {
+  display: block;
+  text-align: center;
+  width: 100%;
+  padding: 0.76rem 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--text-dark) !important;
+  font-size: 0.93rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color var(--transition), color var(--transition),
+    background var(--transition), transform var(--transition);
+}
+
+.btn-login-cta:hover {
+  border-color: var(--blue-deep);
+  color: var(--blue-deep) !important;
+  background: var(--blue-light);
+  transform: translateY(-1px);
+}
+
+/* Footer note */
+.reg-footer-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 1.1rem;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .register-root {
+    flex-direction: column;
+  }
+
+  .reg-panel-right {
+    min-height: 100vh;
+  }
+
+  .reg-form-container {
+    padding: 2rem 1rem 3rem;
+    align-items: flex-start;
+  }
+
+  .reg-form-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .reg-form-heading {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reg-form-card {
+    padding: 1.4rem 1rem;
+    border-radius: 16px;
+  }
+
+  .reg-form-heading {
+    font-size: 1.25rem;
+  }
+}
+
+/* ── REDUCED MOTION ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

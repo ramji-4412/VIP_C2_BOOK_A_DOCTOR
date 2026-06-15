@@ -26,6 +26,7 @@ const authMiddleware = async (req, res, next) => {
     req.body = req.body || {};
 
     // Attach User ID
+    req.userId = decoded.userId;
     req.body.userId = decoded.userId;
 
     next();

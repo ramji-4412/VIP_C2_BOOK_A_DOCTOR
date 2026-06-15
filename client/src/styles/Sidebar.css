@@ -1,0 +1,432 @@
+/* ================================================================
+   ArogyaMitra – Sidebar.css
+   Design tokens (consistent with Home / Login / Register):
+     --blue-deep   #0A4FA6
+     --blue-mid    #1A73E8
+     --blue-light  #E8F1FD
+     --teal        #00B4A6
+     --white       #FFFFFF
+     --text-dark   #0F1C2E
+     --text-muted  #5A6E84
+     --border      #DCE8F8
+   ================================================================ */
+
+:root {
+  --blue-deep: #0a4fa6;
+  --blue-mid: #1a73e8;
+  --blue-light: #e8f1fd;
+  --teal: #00b4a6;
+  --white: #ffffff;
+  --text-dark: #0f1c2e;
+  --text-muted: #5a6e84;
+  --border: #dce8f8;
+
+  /* Sidebar-specific */
+  --sb-width: 248px;
+  --sb-width-collapsed: 72px;
+  --sb-bg: #07275c;          /* deep navy, slightly lighter than panel-left */
+  --sb-bg-hover: rgba(255, 255, 255, 0.07);
+  --sb-bg-active: rgba(0, 180, 166, 0.15);
+  --sb-transition: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── SIDEBAR SHELL ─────────────────────────────────────────────── */
+.am-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: var(--sb-width);
+  background: var(--sb-bg);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: width var(--sb-transition);
+  overflow: hidden;
+  box-shadow: 2px 0 16px rgba(6, 20, 50, 0.2);
+}
+
+.am-sidebar--collapsed {
+  width: var(--sb-width-collapsed);
+}
+
+/* ── HEADER: BRAND + TOGGLE ────────────────────────────────────── */
+.am-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1rem 1rem 1.1rem;
+  min-height: 64px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.am-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.am-sidebar__brand--icon-only {
+  justify-content: center;
+  width: 100%;
+}
+
+.am-brand-icon {
+  color: var(--teal);
+  font-size: 1.25rem;
+  font-style: normal;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.am-brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.3px;
+  opacity: 1;
+  transition: opacity var(--sb-transition);
+}
+
+.am-sidebar--collapsed .am-brand-text {
+  opacity: 0;
+  width: 0;
+}
+
+/* Collapse toggle button */
+.am-collapse-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  padding: 0;
+}
+
+.am-collapse-btn:hover {
+  background: rgba(255, 255, 255, 0.13);
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.am-collapse-arrow {
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform var(--sb-transition);
+  margin-left: -1px;
+}
+
+.am-collapse-arrow--right {
+  transform: rotate(180deg);
+}
+
+/* ── USER CHIP ─────────────────────────────────────────────────── */
+.am-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.am-user-chip--collapsed {
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.am-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--blue-mid));
+  color: var(--white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+  cursor: default;
+}
+
+.am-user-info {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.am-user-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.am-user-role {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+}
+
+/* Online status dot */
+.am-user-status {
+  position: absolute;
+  bottom: 14px;
+  left: 38px;
+  width: 9px;
+  height: 9px;
+  background: #48bb78;
+  border-radius: 50%;
+  border: 2px solid var(--sb-bg);
+  flex-shrink: 0;
+}
+
+.am-user-chip--collapsed .am-user-status {
+  bottom: 12px;
+  left: calc(50% + 9px);
+}
+
+/* ── NAV SECTION LABEL ─────────────────────────────────────────── */
+.am-nav-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 1rem 1.1rem 0.35rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ── NAV ITEMS ─────────────────────────────────────────────────── */
+.am-nav {
+  padding: 0 0.6rem;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.am-nav__tooltip-wrap {
+  display: block;
+}
+
+.am-nav__item {
+  display: flex !important;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem !important;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background 0.18s ease, color 0.18s ease;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.am-sidebar--collapsed .am-nav__item {
+  justify-content: center;
+  padding: 0.7rem !important;
+}
+
+.am-nav__item:hover {
+  background: var(--sb-bg-hover);
+  color: var(--white) !important;
+}
+
+.am-nav__item--active {
+  background: var(--sb-bg-active) !important;
+  color: var(--teal) !important;
+  font-weight: 700;
+}
+
+.am-nav__item--active:hover {
+  background: var(--sb-bg-active) !important;
+  color: var(--teal) !important;
+}
+
+/* Active left bar */
+.am-active-bar {
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  background: var(--teal);
+  border-radius: 0 3px 3px 0;
+}
+
+/* Icon */
+.am-nav__icon {
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Label */
+.am-nav__label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badge */
+.am-nav__badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.18em 0.48em;
+  border-radius: 20px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+/* ── SPACER ────────────────────────────────────────────────────── */
+.am-sidebar__spacer {
+  flex: 1;
+}
+
+/* ── FOOTER ────────────────────────────────────────────────────── */
+.am-sidebar__footer {
+  flex-shrink: 0;
+  padding: 0.75rem 0.6rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Help card (expanded only) */
+.am-help-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.am-help-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0 0 0.2rem;
+}
+
+.am-help-sub {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 0.55rem;
+  line-height: 1.5;
+}
+
+.am-help-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--teal);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.am-help-link:hover {
+  color: #4dd6cd;
+  text-decoration: underline;
+}
+
+/* Logout button */
+.am-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.am-logout-btn:hover {
+  background: rgba(220, 53, 69, 0.15);
+  color: #fc8181;
+}
+
+.am-logout-btn--icon {
+  justify-content: center;
+  padding: 0.7rem;
+}
+
+.am-logout-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── MAIN CONTENT OFFSET HELPER ────────────────────────────────── */
+/* Wrap your page content in .am-page-content for automatic offset */
+.am-page-content {
+  margin-left: var(--sb-width);
+  transition: margin-left var(--sb-transition);
+  min-height: 100vh;
+}
+
+.am-sidebar--collapsed ~ .am-page-content,
+.am-page-content--collapsed {
+  margin-left: var(--sb-width-collapsed);
+}
+
+/* ── RESPONSIVE: mobile drawer ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .am-sidebar {
+    transform: translateX(-100%);
+    width: var(--sb-width);
+    transition: transform var(--sb-transition);
+  }
+
+  .am-sidebar--mobile-open {
+    transform: translateX(0);
+  }
+
+  .am-sidebar--collapsed {
+    /* On mobile, ignore collapsed state — always full width when open */
+    width: var(--sb-width);
+  }
+
+  .am-page-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* ── REDUCED MOTION ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .am-sidebar,
+  .am-collapse-arrow,
+  .am-nav__item,
+  .am-logout-btn,
+  .am-collapse-btn {
+    transition: none !important;
+  }
+}

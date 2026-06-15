@@ -1,0 +1,531 @@
+/* ============================================================
+   ArogyaMitra — DoctorList
+   Consistent with UserHome design tokens
+   ============================================================ */
+
+/* ── Tokens ── */
+:root {
+  --dl-brand:         #0d6e6e;
+  --dl-brand-light:   #e6f4f4;
+  --dl-brand-dark:    #094e4e;
+  --dl-accent:        #14b8a6;
+
+  --dl-text-primary:   #111827;
+  --dl-text-secondary: #6b7280;
+  --dl-text-muted:     #9ca3af;
+
+  --dl-bg-page:        #f4f6f9;
+  --dl-bg-card:        #ffffff;
+  --dl-border:         #e5e7eb;
+
+  --dl-shadow-sm:  0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --dl-shadow-md:  0 4px 16px rgba(0,0,0,.09);
+  --dl-shadow-lg:  0 8px 32px rgba(0,0,0,.11);
+
+  --dl-radius-sm:  8px;
+  --dl-radius-md:  14px;
+  --dl-radius-lg:  18px;
+  --dl-radius-pill: 999px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ============================================================
+   Page wrapper
+   ============================================================ */
+.dl-page {
+  min-height: 100vh;
+  background-color: var(--dl-bg-page);
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: var(--dl-text-primary);
+}
+
+.dl-container {
+  padding: 32px 24px 48px;
+  max-width: 1280px;
+}
+
+/* ============================================================
+   Page header
+   ============================================================ */
+.dl-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.dl-page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--dl-text-primary);
+  margin: 0 0 4px;
+  letter-spacing: -0.03em;
+}
+
+.dl-page-sub {
+  font-size: 0.875rem;
+  color: var(--dl-text-secondary);
+  margin: 0;
+}
+
+/* ============================================================
+   Filters bar
+   ============================================================ */
+.dl-filters {
+  background: var(--dl-bg-card);
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-md);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--dl-shadow-sm);
+}
+
+/* Search */
+.dl-search-wrap {
+  position: relative;
+}
+
+.dl-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--dl-text-muted);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.dl-search-input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-sm);
+  font-size: 0.875rem;
+  color: var(--dl-text-primary);
+  background: var(--dl-bg-page);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.dl-search-input::placeholder { color: var(--dl-text-muted); }
+.dl-search-input:focus {
+  border-color: var(--dl-brand);
+  box-shadow: 0 0 0 3px rgba(13,110,110,.12);
+}
+
+/* Spec pills */
+.dl-spec-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dl-pill {
+  padding: 5px 14px;
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-pill);
+  background: transparent;
+  color: var(--dl-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.dl-pill:hover {
+  border-color: var(--dl-brand);
+  color: var(--dl-brand);
+  background: var(--dl-brand-light);
+}
+.dl-pill--active {
+  background: var(--dl-brand);
+  border-color: var(--dl-brand);
+  color: #fff;
+}
+.dl-pill--active:hover {
+  background: var(--dl-brand-dark);
+  border-color: var(--dl-brand-dark);
+  color: #fff;
+}
+
+/* Availability toggle */
+.dl-avail-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+.dl-avail-toggle input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dl-toggle-track {
+  width: 40px;
+  height: 22px;
+  background: var(--dl-border);
+  border-radius: var(--dl-radius-pill);
+  position: relative;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+.dl-avail-toggle input:checked + .dl-toggle-track {
+  background: var(--dl-brand);
+}
+
+.dl-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  transition: left 0.2s ease;
+}
+.dl-avail-toggle input:checked ~ .dl-toggle-track .dl-toggle-thumb {
+  left: 21px;
+}
+
+.dl-toggle-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--dl-text-secondary);
+}
+
+/* ============================================================
+   Doctor Card
+   ============================================================ */
+.dl-card {
+  background: var(--dl-bg-card);
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-md);
+  padding: 22px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  box-shadow: var(--dl-shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  height: 100%;
+}
+.dl-card:hover {
+  box-shadow: var(--dl-shadow-md);
+  transform: translateY(-3px);
+}
+
+/* Tag ribbon */
+.dl-card-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: linear-gradient(135deg, var(--dl-brand-dark), var(--dl-accent));
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--dl-radius-pill);
+}
+
+/* Card header: avatar + identity */
+.dl-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.dl-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.dl-card-identity {
+  flex: 1;
+  min-width: 0;
+  padding-right: 60px; /* space for tag */
+}
+
+.dl-doctor-name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--dl-text-primary);
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dl-specialization {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--dl-brand);
+  margin: 0 0 6px;
+}
+
+.dl-spec-icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.dl-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dl-stars {
+  display: flex;
+  gap: 1px;
+}
+.dl-star { display: flex; align-items: center; }
+.dl-star--on  { color: #f59e0b; }
+.dl-star--off { color: #d1d5db; }
+
+.dl-rating-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--dl-text-primary);
+}
+
+.dl-reviews {
+  font-size: 0.75rem;
+  color: var(--dl-text-muted);
+}
+
+/* Divider */
+.dl-divider {
+  height: 1px;
+  background: var(--dl-border);
+  margin: 0 0 16px;
+}
+
+/* Meta grid */
+.dl-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 10px;
+  margin-bottom: 18px;
+}
+
+.dl-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.dl-meta-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--dl-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.dl-meta-icon--exp   { background: #eff6ff; color: #3b82f6; }
+.dl-meta-icon--fee   { background: #f0fdf4; color: #16a34a; }
+.dl-meta-icon--phone { background: #fff7ed; color: #ea580c; }
+.dl-meta-icon--loc   { background: #fdf4ff; color: #9333ea; }
+
+.dl-meta-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dl-text-muted);
+  margin: 0 0 1px;
+}
+
+.dl-meta-value {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dl-text-primary);
+  margin: 0;
+}
+
+.dl-phone {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+/* Card footer */
+.dl-card-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--dl-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Availability badge */
+.dl-avail-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--dl-radius-pill);
+}
+.dl-avail-badge--on  { background: #dcfce7; color: #16a34a; }
+.dl-avail-badge--off { background: #fee2e2; color: #dc2626; }
+
+.dl-avail-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dl-avail-badge--on  .dl-avail-dot { background: #16a34a; }
+.dl-avail-badge--off .dl-avail-dot { background: #dc2626; }
+
+/* Book button */
+.dl-book-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: var(--dl-radius-sm);
+  background: var(--dl-brand);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+.dl-book-btn:hover:not(:disabled) {
+  background: var(--dl-brand-dark);
+  box-shadow: 0 4px 12px rgba(13,110,110,.3);
+}
+.dl-book-btn:disabled {
+  background: var(--dl-border);
+  color: var(--dl-text-muted);
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   Empty state
+   ============================================================ */
+.dl-empty {
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--dl-bg-card);
+  border: 1px solid var(--dl-border);
+  border-radius: var(--dl-radius-lg);
+  box-shadow: var(--dl-shadow-sm);
+}
+
+.dl-empty-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--dl-brand-light);
+  color: var(--dl-brand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.dl-empty-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dl-text-primary);
+  margin: 0 0 6px;
+}
+
+.dl-empty-sub {
+  font-size: 0.875rem;
+  color: var(--dl-text-muted);
+  margin: 0 0 20px;
+}
+
+.dl-reset-btn {
+  padding: 8px 22px;
+  border: 1.5px solid var(--dl-brand);
+  border-radius: var(--dl-radius-sm);
+  background: transparent;
+  color: var(--dl-brand);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.dl-reset-btn:hover {
+  background: var(--dl-brand);
+  color: #fff;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 767px) {
+  .dl-container {
+    padding: 20px 14px 40px;
+  }
+  .dl-page-title {
+    font-size: 1.3rem;
+  }
+  .dl-filters {
+    padding: 14px 14px;
+  }
+  .dl-card-identity {
+    padding-right: 0;
+  }
+  .dl-card-tag {
+    position: static;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .dl-card-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .dl-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .dl-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dl-book-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

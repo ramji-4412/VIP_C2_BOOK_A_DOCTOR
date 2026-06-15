@@ -1,5 +1,7 @@
 const express = require("express");
 const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -14,18 +16,28 @@ const {
   getAllNotificationController,
   markAllNotificationSeenController,
   cancelAppointmentController,
+  clearAppointmentHistoryController,
   deleteAllNotificationController,
+  deleteAccountController,
   searchDoctorsController,
 } = require("../controllers/userController");
 
 const router = express.Router();
+const uploadDir = path.join(__dirname, "..", "uploads");
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, uploadDir);
   },
 
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+    const safeName = file.originalname.replace(/[^a-zA-Z0-9.\-_]/g, "-");
+
+    cb(null, Date.now() + "-" + safeName);
   },
 });
 
@@ -61,10 +73,18 @@ router.post(
 router.post("/cancelappointment", authMiddleware, cancelAppointmentController);
 
 router.delete(
+  "/clearappointmenthistory",
+  authMiddleware,
+  clearAppointmentHistoryController,
+);
+
+router.delete(
   "/deleteallnotification",
   authMiddleware,
   deleteAllNotificationController,
 );
+
+router.delete("/deleteaccount", authMiddleware, deleteAccountController);
 
 router.get("/searchdoctors", authMiddleware, searchDoctorsController);
 

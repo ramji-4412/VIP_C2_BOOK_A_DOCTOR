@@ -1,0 +1,104 @@
+.user-appointments-container {
+  padding: 40px 16px;
+}
+
+.user-appointments-card {
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(13, 95, 99, 0.08);
+}
+
+.user-appointments-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.user-appointments-header h2 {
+  color: #0d5f63;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.user-appointments-header p {
+  color: #6c7a7b;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.user-appointments-table {
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+
+.user-appointments-table thead th {
+  background-color: #0d5f63;
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  white-space: nowrap;
+}
+
+.user-appointments-table tbody td {
+  color: #334b4c;
+  font-size: 0.95rem;
+}
+
+.status-badge {
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.status-pending {
+  background-color: #ffedd5 !important;
+  color: #b45309 !important;
+}
+
+.status-approved {
+  background-color: #d1fae5 !important;
+  color: #047857 !important;
+}
+
+.status-cancelled {
+  background-color: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+.cancel-btn {
+  background-color: #e53e3e;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cancel-btn:hover:not(:disabled),
+.cancel-btn:focus:not(:disabled) {
+  background-color: #c53030;
+}
+
+.cancel-btn:disabled {
+  background-color: #cbd5e0;
+  cursor: not-allowed;
+}
+
+.no-appointments {
+  text-align: center;
+  color: #6c7a7b;
+  padding: 24px 0;
+}
+
+@media (max-width: 768px) {
+  .user-appointments-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .user-appointments-table thead th,
+  .user-appointments-table tbody td {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+}
