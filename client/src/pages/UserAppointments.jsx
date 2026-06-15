@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api/api";
 import AppShell from "../components/AppShell";
+import { formatTitleCase } from "../utils/formatters";
 
 function UserAppointments() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
@@ -60,7 +61,7 @@ function UserAppointments() {
                 <td>{item.doctorInfo?.specialization || "-"}</td>
                 <td>{item.date}</td>
                 <td>{item.time}</td>
-                <td><span className={`badge-soft ${item.status}`}>{item.status}</span></td>
+                <td><span className={`badge-soft ${item.status}`}>{formatTitleCase(item.status)}</span></td>
                 <td>{item.document?.originalname || "-"}</td>
                 <td>
                   <button

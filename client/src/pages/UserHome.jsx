@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api/api";
 import AppShell from "../components/AppShell";
+import { formatTitleCase } from "../utils/formatters";
 
 function UserHome() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
@@ -131,7 +132,7 @@ function UserHome() {
             appointments.slice(0, 4).map((item) => (
               <div className="d-flex justify-content-between border-bottom py-2" key={item._id}>
                 <span>{item.doctorName || item.doctorInfo?.fullName}</span>
-                <span className={`badge-soft ${item.status}`}>{item.status}</span>
+                <span className={`badge-soft ${item.status}`}>{formatTitleCase(item.status)}</span>
               </div>
             ))
           ) : (
@@ -165,7 +166,7 @@ function UserHome() {
                     <td>{item.userInfo?.fullName || "Patient"}</td>
                     <td>{item.date}</td>
                     <td>{item.time}</td>
-                    <td><span className={`badge-soft ${item.status}`}>{item.status}</span></td>
+                    <td><span className={`badge-soft ${item.status}`}>{formatTitleCase(item.status)}</span></td>
                     <td>
                       <div className="actions">
                         <button className="secondary-btn" disabled={item.status !== "pending"} onClick={() => updateDoctorStatus(item._id, "approved")}>Approve</button>

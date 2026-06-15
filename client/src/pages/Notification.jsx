@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api/api";
 import AppShell from "../components/AppShell";
+import { formatTitleCase } from "../utils/formatters";
 
 function Notification() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
@@ -36,12 +37,6 @@ function Notification() {
     loadNotifications();
   }, []);
 
-  const formatType = (type = "notification") =>
-    type
-      .split("-")
-      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(" ");
-
   const sortNewestFirst = (items) =>
     [...items].sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
@@ -50,7 +45,7 @@ function Notification() {
       <div className="grid">
         {sortNewestFirst(items).map((item, index) => (
           <div className="panel" key={item._id || `${item.type}-${index}`}>
-            <span className="badge-soft">{formatType(item.type)}</span>
+            <span className="badge-soft">{formatTitleCase(item.type || "notification")}</span>
             <p className="mb-0 mt-2">{item.message}</p>
             {item.createdAt && (
               <p className="muted mb-0 mt-2">

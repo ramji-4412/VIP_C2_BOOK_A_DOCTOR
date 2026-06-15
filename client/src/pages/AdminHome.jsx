@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../api/api";
 import AppShell from "../components/AppShell";
+import { formatTitleCase } from "../utils/formatters";
 
 function AdminHome() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
@@ -87,7 +88,7 @@ function AdminHome() {
                   <td>{doctor.fullName}</td>
                   <td>{doctor.specialization}</td>
                   <td>Rs. {doctor.feesPerConsultation}</td>
-                  <td><span className={`badge-soft ${doctor.status}`}>{doctor.status}</span></td>
+                  <td><span className={`badge-soft ${doctor.status}`}>{formatTitleCase(doctor.status)}</span></td>
                   <td>{doctor.email}<br /><span className="muted">{doctor.phone}</span></td>
                   <td>
                     <div className="actions">
@@ -121,7 +122,7 @@ function AdminHome() {
                   <td>{item.fullName}</td>
                   <td>{item.email}</td>
                   <td>{item.phone || "-"}</td>
-                  <td>{item.type}</td>
+                  <td>{formatTitleCase(item.type)}</td>
                   <td>{item.isDoctor ? "Yes" : "No"}</td>
                 </tr>
               ))}
@@ -150,7 +151,7 @@ function AdminHome() {
                   <td>{item.doctorInfo?.fullName || "Doctor"}</td>
                   <td>{item.date}</td>
                   <td>{item.time}</td>
-                  <td><span className={`badge-soft ${item.status}`}>{item.status}</span></td>
+                  <td><span className={`badge-soft ${item.status}`}>{formatTitleCase(item.status)}</span></td>
                 </tr>
               ))}
             </tbody>

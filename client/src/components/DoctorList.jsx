@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import API from "../api/api";
 import AppShell from "./AppShell";
+import { formatTitleCase } from "../utils/formatters";
 
 function DoctorCard({ doctor, user, onBooked }) {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -47,7 +48,7 @@ function DoctorCard({ doctor, user, onBooked }) {
       <div>
         <h3>{doctor.fullName}</h3>
         <p className="muted mb-1">{doctor.specialization}</p>
-        <span className={`badge-soft ${doctor.status}`}>{doctor.status}</span>
+        <span className={`badge-soft ${doctor.status}`}>{formatTitleCase(doctor.status)}</span>
       </div>
       <p className="mb-0">{doctor.experience} years experience</p>
       <p className="mb-0">Fee: Rs. {doctor.feesPerConsultation}</p>
@@ -127,7 +128,7 @@ function DoctorList() {
       <div className="page-head">
         <div>
           <h2>Find a doctor</h2>
-          <p>{filteredDoctors.length} approved doctor{filteredDoctors.length === 1 ? "" : "s"} available.</p>
+          <p>{filteredDoctors.length} Approved doctor{filteredDoctors.length === 1 ? "" : "s"} available.</p>
         </div>
       </div>
 
