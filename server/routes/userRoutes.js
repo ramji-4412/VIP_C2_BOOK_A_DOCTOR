@@ -8,6 +8,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const {
   registerController,
   loginController,
+  forgotPasswordController,
   authController,
   docController,
   getAllDoctorsControllers,
@@ -46,6 +47,8 @@ const upload = multer({ storage });
 router.post("/register", registerController);
 
 router.post("/login", loginController);
+
+router.post("/forgotpassword", forgotPasswordController);
 
 router.post("/getuserdata", authMiddleware, authController);
 

@@ -78,6 +78,10 @@ function Login() {
             />
           </div>
 
+          <p className="auth-helper-link">
+            <Link to="/forgot-password">Forgot password?</Link>
+          </p>
+
           <button className="primary-btn w-100" type="submit" disabled={loading}>
             {loading ? "Signing in..." : "Login"}
           </button>

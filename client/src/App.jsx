@@ -7,6 +7,7 @@ import {
 import "./styles/App.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 import UserHome from "./pages/UserHome";
 import AdminHome from "./pages/AdminHome";
 import ApplyDoctor from "./pages/ApplyDoctor";
@@ -64,6 +65,11 @@ function App() {
       <Route
         path="/register"
         element={<Register />}
+      />
+
+      <Route
+        path="/forgot-password"
+        element={<ForgotPassword />}
       />
 
       <Route

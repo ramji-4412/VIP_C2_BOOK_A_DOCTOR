@@ -123,6 +123,61 @@ const loginController = async (req, res) => {
   }
 };
 
+const forgotPasswordController = async (req, res) => {
+  try {
+    const { email, phone, newPassword } = req.body;
+
+    if (!email || !phone || !newPassword) {
+      return res.status(400).send({
+        success: false,
+        message: "Email, phone, and new password are required",
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).send({
+        success: false,
+        message: "Password must be at least 6 characters",
+      });
+    }
+
+    const user = await userModel.findOne({
+      email: email.toLowerCase().trim(),
+      phone: phone.trim(),
+    });
+
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "No account found with that email and phone number",
+      });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+
+    user.notification.push({
+      type: "password-updated",
+      message: "Your password was reset successfully.",
+      createdAt: new Date(),
+    });
+
+    await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "Password reset successfully. Please login with your new password.",
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).send({
+      success: false,
+      message: "Password reset failed",
+      error: error.message,
+    });
+  }
+};
+
 const authController = async (req, res) => {
   try {
     const user = await userModel.findById(req.body.userId);
@@ -693,6 +748,7 @@ const searchDoctorsController = async (req, res) => {
 module.exports = {
   registerController,
   loginController,
+  forgotPasswordController,
   authController,
   docController,
   getAllDoctorsControllers,
